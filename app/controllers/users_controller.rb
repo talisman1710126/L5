@@ -13,7 +13,8 @@ class UsersController < ApplicationController
       pass: BCrypt::Password.create(params[:user][:pass])
     )
     if @user.save
-      redirect_to users_path
+      session[:login_uid] = @user.uid
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
