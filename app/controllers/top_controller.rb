@@ -2,6 +2,7 @@ class TopController < ApplicationController
   def main
     @tweets = Tweet.all.order(created_at: :desc)
     @tweet = Tweet.new
+    @login_user = User.find_by(uid: session[:login_uid])
   end
 
   def login
