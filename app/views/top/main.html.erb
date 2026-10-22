@@ -23,7 +23,7 @@
 <table>
   <% @tweets.each do |e| %>
     <tr>
-      <td><%= e.user.uid %></td>
+      <td><%= link_to e.user.uid, user_path(e.user) %></td>
       <td><%= e.message %></td>
       <td>♥<%= e.likes.count %></td>
       <td>

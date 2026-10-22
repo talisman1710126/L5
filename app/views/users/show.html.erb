@@ -1,0 +1,18 @@
+<h1><%= @user.uid %> のプロフィール</h1>
+
+<p>
+  <% if @user.profile %>
+    <%= @user.profile.message %>
+  <% else %>
+    （プロフィールは未設定です）
+  <% end %>
+</p>
+
+<h2>ツイート（<%= @user.tweets.count %>件）</h2>
+<ul>
+  <% @user.tweets.order(created_at: :desc).each do |t| %>
+    <li><%= t.message %>　♥<%= t.likes.count %></li>
+  <% end %>
+</ul>
+
+<%= link_to "トップへ戻る", root_path %>
