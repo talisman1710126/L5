@@ -1,0 +1,11 @@
+<h1>プロフィール編集</h1>
+<%= form_with model: @profile, url: profile_path, method: :patch do |f| %>
+  <%= f.text_area :message, rows: 3, cols: 40 %><br>
+  <%= f.submit "保存" %>
+<% end %>
+
+<% if @user.profile&.persisted? %>
+  <%= link_to "プロフィールを削除", profile_path, data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+<% end %>
+<br>
+<%= link_to "トップへ戻る", root_path %>

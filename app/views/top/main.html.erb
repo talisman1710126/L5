@@ -2,7 +2,11 @@
 <p style="color: red;"><%= flash[:alert] %></p>
 
 <% if session[:login_uid] %>
-  <p><%= session[:login_uid] %> でログイン中　<%= link_to "ログアウト", top_logout_path %></p>
+    <p>
+    <%= session[:login_uid] %> でログイン中　
+    <%= link_to "プロフィール編集", edit_profile_path %>　
+    <%= link_to "ログアウト", top_logout_path %>
+    </p>
   <%= form_with model: @tweet do |f| %>
     <%= f.text_field :message %>
     <%= f.submit "ツイート" %>
