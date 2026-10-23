@@ -4,6 +4,7 @@
 <% end %>
 <%= form_with model: @user do |f| %>
   ユーザID：<%= f.text_field :uid %><br>
-  パスワード：<%= f.password_field :pass %><br>
+  パスワード：<%= f.text_field :password %><br>
+  パスワード（確認）：<%= f.text_field :password_confirmation %><br>
   <%= f.submit "登録" %>
 <% end %>

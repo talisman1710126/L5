@@ -3,8 +3,11 @@
   <% @users.each do |u| %>
     <tr>
       <td><%= u.uid %></td>
+      <td><%= u.password_digest %></td>
       <td><%= link_to "削除", user_path(u), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %></td>
     </tr>
   <% end %>
 </table>
 <%= link_to "新規登録", new_user_path %>
+
+<%= link_to "トップへ戻る", root_path %>
