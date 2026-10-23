@@ -24,7 +24,7 @@
       <td>♥<%= e.likes.count %></td>
       <td>
         <% if current_user %>
-          <% if current_user.like_tweets.include?(e) %>
+          <% if e.liked?(current_user) %>
             <%= link_to "いいね削除", like_path(e), data: { turbo_method: :delete } %>
           <% else %>
             <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post } %>

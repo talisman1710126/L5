@@ -1,17 +1,19 @@
 class LikesController < ApplicationController
   def create
-    user = current_user
-    return redirect_to root_path unless user
+    return redirect_to root_path unless current_user
     tweet = Tweet.find(params[:tweet_id])
-    user.like_tweets << tweet
+    unless tweet.liked?(current_user)
+      tweet.like(current_user)
+    end
     redirect_to root_path
   end
 
-    def destroy
-    user = current_user
-    return redirect_to root_path unless user
+  def destroy
+    return redirect_to root_path unless current_user
     tweet = Tweet.find(params[:id])
-    tweet.likes.find_by(user_id: user.id)&.destroy
+    if tweet.liked?(current_user)
+      tweet.unlike(current_user)
+    end
     redirect_to root_path
   end
 end
