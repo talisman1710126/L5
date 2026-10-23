@@ -1,8 +1,8 @@
 <h1>つぶやきアプリ</h1>
 <p style="color: red;"><%= flash[:alert] %></p>
 
-<% if session[:login_uid] %>
-  <p><%= session[:login_uid] %> でログイン中　<%= link_to "ログアウト", top_logout_path %></p>
+<% if current_user %>
+  <p><%= current_user.uid %> でログイン中　<%= link_to "ログアウト", top_logout_path %></p>
   <%= form_with model: @tweet do |f| %>
     <%= f.text_field :message %>
     <%= f.submit "ツイート" %>
@@ -23,8 +23,8 @@
       <td><%= e.message %></td>
       <td>♥<%= e.likes.count %></td>
       <td>
-        <% if @login_user %>
-          <% if @login_user.like_tweets.include?(e) %>
+        <% if current_user %>
+          <% if current_user.like_tweets.include?(e) %>
             <%= link_to "いいね削除", like_path(e), data: { turbo_method: :delete } %>
           <% else %>
             <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post } %>
@@ -32,7 +32,7 @@
         <% end %>
       </td>
       <td>
-        <% if session[:login_uid] == e.user.uid %>
+        <% if current_user == e.user %>
           <%= link_to "削除", tweet_path(e), data: { turbo_method: :delete } %>
         <% end %>
       </td>

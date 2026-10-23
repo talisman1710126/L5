@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   def create
-    user = User.find_by(uid: session[:login_uid])
+    user = current_user
     if user
       Tweet.create(message: params[:tweet][:message], user: user)
     end
